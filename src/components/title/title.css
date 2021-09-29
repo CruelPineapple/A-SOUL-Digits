@@ -3,3 +3,9 @@
     font-family: 'Josefin Sans', sans-serif;
     font-size: 130px;
 }
+@media only screen and (max-width: 850px){
+.title-component{
+    font-size: 50px;
+}
+
+}

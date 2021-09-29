@@ -8,6 +8,15 @@
     position: relative;
     top: 20px;
 }
+@media only screen and (max-width: 850px){
+    .outer-box:nth-child(odd){
+        position: relative;
+        top: 0;
+    }
+    .outer-box{
+        margin: 10px 0;
+    }
+}
 .image{
     width: 170px;
     height: 270px;
