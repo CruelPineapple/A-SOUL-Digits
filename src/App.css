@@ -12,6 +12,6 @@
 .hover-box-container{
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-bottom: 50px;
 }
