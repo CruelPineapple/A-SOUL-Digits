@@ -1,9 +1,9 @@
 import './HoverBox.css'
-import ava from '../../assets/1.webp'
-import bella from '../../assets/2.webp'
-import carol from '../../assets/3.webp'
-import diana from '../../assets/4.webp'
-import eileen from '../../assets/5.webp'
+import imgAva from '../../assets/1.webp'
+import imgBella from '../../assets/2.webp'
+import imgCarol from '../../assets/3.webp'
+import imgDiana from '../../assets/4.webp'
+import imgEileen from '../../assets/5.webp'
 import React from 'react';
 
 class HoverBox extends React.Component{
@@ -18,21 +18,16 @@ class HoverBox extends React.Component{
         this.handleLeave = this.handleLeave.bind(this);
     }
     get img(){
-        switch (this.props.name) {
-            case "ava":
-                return ava
-            case "bella":
-                return bella;
-            case "carol":
-                return carol;
-            case "diana":
-                return diana;
-            case "eileen":
-                return eileen;
-            default:
-                return 0
+        const nameObj={
+            "ava": imgAva,
+            "bella": imgBella,
+            "carol": imgCarol,
+            "diana": imgDiana,
+            "eileen": imgEileen
         }
+        return nameObj[this.props.name];
     }
+
 
     handleEnter(){
         this.setState({
