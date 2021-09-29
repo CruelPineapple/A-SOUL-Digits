@@ -1,23 +1,21 @@
 .outer-box{
     overflow: hidden;
-    width: 150px;
-    height: 240px;
+    width: 170px;
+    height: 270px;
+    margin: 0 20px;
+}
+.outer-box:nth-child(odd){
+    position: relative;
+    top: 20px;
 }
 .image{
-    width: 150px;
-    height: 240px;
+    width: 170px;
+    height: 270px;
     transition: 0.5s;
-    position: relative;
-    top: 0;
 }
-/* .image:hover{
-    position: relative;
-    top: 60px;
-} */
 .show{
     visibility: visible;
-    height: 60px;
-
+    height: 80px;
     transition: 0.5s;
 }
 .hide{
