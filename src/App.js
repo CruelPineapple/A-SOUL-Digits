@@ -3,7 +3,7 @@ import "./App.css";
 import Title from "./components/title/title";
 import HoverBox from "./components/HoverBox/HoverBox";
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 class App extends React.Component {
 
   constructor(props){
@@ -38,15 +38,25 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    axios.get("api/x/relation/stat",{
-      params:{
-        vmid: 672328094
-      }
-    }).then((res)=>{
-      console.log(res)
-    }).catch((e)=>{
-      console.error(e)
-    })
+    // axios.get("api/x/relation/stat",{
+    //   params:{
+    //     vmid: 672328094
+    //   }
+    // }).then((res)=>{
+    //   console.log(res)
+    // }).catch((e)=>{
+    //   console.error(e)
+    // })
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("get","api/x/relation/stat?vmid=672328094",true);
+    // xhr.send();
+    // xhr.onreadystatechange = function(e){
+    //   console.log(xhr.readyState)
+    //   if(xhr.readyState === 4&&xhr.status === 200){
+    //     console.log(xhr.responseText)
+    //   }
+    // }
+
   }
 
   render(){
