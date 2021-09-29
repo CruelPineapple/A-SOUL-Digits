@@ -17,9 +17,11 @@
     visibility: visible;
     height: 80px;
     transition: 0.5s;
+    transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
 .hide{
     transition: 0.5s;
+    transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
     height: 0;
     visibility: hidden;
 }
