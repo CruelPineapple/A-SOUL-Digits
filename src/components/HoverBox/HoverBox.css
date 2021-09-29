@@ -20,7 +20,18 @@
 .image{
     width: 170px;
     height: 270px;
-    transition: 0.5s;
+}
+.bfc-box{
+    position: relative;
+    overflow: hidden;
+}
+.name-bar{
+    color: white;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 24px;
+    writing-mode: vertical-lr;
 }
 .show{
     visibility: visible;

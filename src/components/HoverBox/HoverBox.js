@@ -1,54 +1,64 @@
-import './HoverBox.css'
-import imgAva from '../../assets/1.webp'
-import imgBella from '../../assets/2.webp'
-import imgCarol from '../../assets/3.webp'
-import imgDiana from '../../assets/4.webp'
-import imgEileen from '../../assets/5.webp'
-import React from 'react';
+import "./HoverBox.css";
+import imgAva from "../../assets/1.webp";
+import imgBella from "../../assets/2.webp";
+import imgCarol from "../../assets/3.webp";
+import imgDiana from "../../assets/4.webp";
+import imgEileen from "../../assets/5.webp";
+import React from "react";
 
-class HoverBox extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            hiddenClass: "hide",
-            bgColor: props.name,
-        }
+class HoverBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hiddenClass: "hide",
+      bgColor: props.name,
+    };
 
-        this.handleEnter = this.handleEnter.bind(this);
-        this.handleLeave = this.handleLeave.bind(this);
-    }
-    get img(){
-        const nameObj={
-            "ava": imgAva,
-            "bella": imgBella,
-            "carol": imgCarol,
-            "diana": imgDiana,
-            "eileen": imgEileen
-        }
-        return nameObj[this.props.name];
-    }
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleLeave = this.handleLeave.bind(this);
+  }
+  get img() {
+    const nameObj = {
+      ava: imgAva,
+      bella: imgBella,
+      carol: imgCarol,
+      diana: imgDiana,
+      eileen: imgEileen,
+    };
+    return nameObj[this.props.name];
+  }
 
+  handleEnter() {
+    this.setState({
+      hiddenClass: "show",
+    });
+  }
 
-    handleEnter(){
-        this.setState({
-            hiddenClass: "show"
-        })
-    }
+  handleLeave() {
+    this.setState({
+      hiddenClass: "hide",
+    });
+  }
 
-    handleLeave(){
-        this.setState({
-            hiddenClass: "hide"
-        })
-    }
-
-    render(){
-        return (
-            <div onMouseLeave={this.handleLeave} onMouseEnter={this.handleEnter} className="outer-box">
-                <div className={this.state.hiddenClass+" "+this.state.bgColor}></div>
-                <img className="image" src={this.img} alt=""></img>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div
+        onMouseLeave={this.handleLeave}
+        onMouseEnter={this.handleEnter}
+        className="outer-box"
+      >
+        <div
+          className={this.state.hiddenClass + " " + this.state.bgColor}
+        >
+            <div></div>
+        </div>
+        <div className="bfc-box">
+          <div className="name-bar">{this.props.info.bar}</div>
+          <img className="image" src={this.img} alt=""></img>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default HoverBox;
