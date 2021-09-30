@@ -5,6 +5,7 @@ import imgCarol from "../../assets/3.webp";
 import imgDiana from "../../assets/4.webp";
 import imgEileen from "../../assets/5.webp";
 import React from "react";
+import axios from "axios";
 
 class HoverBox extends React.Component {
   constructor(props) {
@@ -12,6 +13,9 @@ class HoverBox extends React.Component {
     this.state = {
       hiddenClass: "hide",
       bgColor: props.name,
+      followers: undefined,
+      changeFollow: undefined,
+      showNumClass: "hide-nums" 
     };
 
     this.handleEnter = this.handleEnter.bind(this);
@@ -29,15 +33,55 @@ class HoverBox extends React.Component {
   }
 
   handleEnter() {
+    this.getFans()
     this.setState({
       hiddenClass: "show",
+      showNumClass: "show-nums"
     });
+    setTimeout(()=>{
+      this.setState({
+        showNumClass: "hide-nums"
+      })
+    }, 2000)
   }
 
   handleLeave() {
     this.setState({
       hiddenClass: "hide",
     });
+  }
+
+  getFans(){
+    axios.get("api/asd",{
+      params:{
+        vmid: this.props.info.vmid
+      }
+    }).then((res)=>{
+      //console.log(res)
+      let followers = res.data.followers
+      let changeStr
+      if(this.state.followers){
+        let change = followers - this.state.followers
+        changeStr = ""
+        if(change >= 0){
+          changeStr += "+"
+        }
+        changeStr += change.toString()
+      }else{
+        changeStr = "+0"
+      }
+      this.setState({
+        followers: followers,
+        changeFollow: changeStr,
+      })
+
+    }).catch((e)=>{
+      console.error(e)
+    })
+  }
+
+  componentDidMount(){
+
   }
 
   render() {
@@ -50,7 +94,9 @@ class HoverBox extends React.Component {
         <div
           className={this.state.hiddenClass + " " + this.state.bgColor}
         >
-            <div></div>
+            <div className={"nums"}>粉丝数：{(this.state.followers / 10000).toFixed(2)}万</div>
+            <div className={`nums ${this.state.showNumClass}`}>{this.state.changeFollow}</div>
+            <div className={"nums"}>24h涨粉：{}</div>
         </div>
         <div className="bfc-box">
           <div className="name-bar">{this.props.info.bar}</div>

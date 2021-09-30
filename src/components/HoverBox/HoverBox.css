@@ -35,7 +35,8 @@
 }
 .show{
     visibility: visible;
-    height: 80px;
+    height: 90px;
+    padding-top: 10px;
     transition: 0.5s;
     transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
@@ -44,6 +45,20 @@
     transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
     height: 0;
     visibility: hidden;
+}
+.nums{
+    color: white;
+    margin-top: 5px;
+}
+.show-nums{
+    opacity: 1;
+    height: 20px;
+    transition: 0.5s;
+}
+.hide-nums{
+    opacity: 0;
+    height: 0;
+    transition: 0.5s;
 }
 .ava{
     background-color: #9ac8e2;
