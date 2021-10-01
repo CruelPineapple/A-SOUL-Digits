@@ -52,7 +52,7 @@ class HoverBox extends React.Component {
   }
 
   getFans(){
-    axios.get("api/asd",{
+    axios.get("api/asd/",{
       params:{
         vmid: this.props.info.vmid
       }
