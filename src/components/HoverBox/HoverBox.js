@@ -15,7 +15,8 @@ class HoverBox extends React.Component {
       bgColor: props.name,
       followers: undefined,
       changeFollow: undefined,
-      showNumClass: "hide-nums" 
+      showNumClass: "hide-nums",
+      yesterday: undefined
     };
 
     this.handleEnter = this.handleEnter.bind(this);
@@ -51,6 +52,20 @@ class HoverBox extends React.Component {
     });
   }
 
+  getYesterday(){
+    axios.get("api/asd/y",{
+      params:{
+        name: this.props.name
+      }
+    }).then((res)=>{
+      this.setState({
+        yesterday: res.data.yesterday
+      })
+    }).catch((e)=>[
+      console.log(e)
+    ])
+  }
+
   getFans(){
     axios.get("api/asd/",{
       params:{
@@ -81,7 +96,8 @@ class HoverBox extends React.Component {
   }
 
   componentDidMount(){
-
+    this.getFans();
+    this.getYesterday();
   }
 
   render() {
@@ -96,7 +112,7 @@ class HoverBox extends React.Component {
         >
             <div className={"nums"}>粉丝数：{(this.state.followers / 10000).toFixed(2)}万</div>
             <div className={`nums ${this.state.showNumClass}`}>{this.state.changeFollow}</div>
-            <div className={"nums"}>24h涨粉：{}</div>
+            <div className={"nums"}>24h涨粉：{this.state.followers-this.state.yesterday}</div>
         </div>
         <div className="bfc-box">
           <div className="name-bar">{this.props.info.bar}</div>
