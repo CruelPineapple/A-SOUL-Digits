@@ -16,7 +16,8 @@ class HoverBox extends React.Component {
       followers: undefined,
       changeFollow: undefined,
       showNumClass: "hide-nums",
-      yesterday: undefined
+      yesterday: undefined,
+      today: undefined
     };
 
     this.handleEnter = this.handleEnter.bind(this);
@@ -31,6 +32,10 @@ class HoverBox extends React.Component {
       eileen: imgEileen,
     };
     return nameObj[this.props.name];
+  }
+
+  get yesterdayInc(){
+    return this.state.today - this.state.yesterday
   }
 
   handleEnter() {
@@ -52,6 +57,20 @@ class HoverBox extends React.Component {
     });
   }
 
+  getToday(){
+    axios.get("api/asd/t",{
+      params:{
+        name: this.props.name
+      }
+    }).then((res)=>{
+      this.setState({
+        today: res.data.today
+      })
+    }).catch((e)=>{
+      console.log(e)
+    })
+  }
+
   getYesterday(){
     axios.get("api/asd/y",{
       params:{
@@ -61,9 +80,9 @@ class HoverBox extends React.Component {
       this.setState({
         yesterday: res.data.yesterday
       })
-    }).catch((e)=>[
+    }).catch((e)=>{
       console.log(e)
-    ])
+    })
   }
 
   getFans(){
@@ -98,6 +117,7 @@ class HoverBox extends React.Component {
   componentDidMount(){
     this.getFans();
     this.getYesterday();
+    this.getToday();
   }
 
   render() {
@@ -110,9 +130,11 @@ class HoverBox extends React.Component {
         <div
           className={this.state.hiddenClass + " " + this.state.bgColor}
         >
-            <div className={"nums"}>粉丝数：{(this.state.followers / 10000).toFixed(2)}万</div>
-            <div className={`nums ${this.state.showNumClass}`}>{this.state.changeFollow}</div>
-            <div className={"nums"}>24h涨粉：{this.state.followers-this.state.yesterday}</div>
+            <div className={"nums"}>粉丝数：{(this.state.followers / 10000).toFixed(2)}万
+              <div className={`float-nums ${this.state.showNumClass}`}>{this.state.changeFollow}</div>
+            </div>
+            <div className={"nums"}>昨日涨粉：{this.yesterdayInc}</div>
+            <div className={"nums"}>今日涨粉：{this.state.followers-this.state.today}</div>
         </div>
         <div className="bfc-box">
           <div className="name-bar">{this.props.info.bar}</div>

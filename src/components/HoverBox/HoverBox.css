@@ -36,8 +36,9 @@
 .show{
     visibility: visible;
     height: 90px;
-    padding-top: 10px;
+    padding-top: 7px;
     transition: 0.5s;
+    position: relative;
     transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
 .hide{
@@ -50,14 +51,18 @@
     color: white;
     margin-top: 5px;
 }
+.float-nums{
+    color: white;
+    display: inline-block;
+}
 .show-nums{
     opacity: 1;
-    height: 20px;
+    width: 15px;
     transition: 0.5s;
 }
 .hide-nums{
     opacity: 0;
-    height: 0;
+    width: 0;
     transition: 0.5s;
 }
 .ava{
