@@ -14,7 +14,7 @@ class HoverBox extends React.Component {
       hiddenClass: "hide",
       bgColor: props.name,
       followers: undefined,
-      changeFollow: undefined,
+      changeFollow: "",
       showNumClass: "hide-nums",
       yesterday: undefined,
       today: undefined
@@ -39,16 +39,22 @@ class HoverBox extends React.Component {
   }
 
   handleEnter() {
-    this.getFans()
+    this.getFans().then(()=>{
+      if(this.state.changeFollow !== "+0"){
+        this.setState({
+          showNumClass: "show-nums"
+        })
+        setTimeout(()=>{
+          this.setState({
+            showNumClass: "hide-nums"
+          })
+        }, 2000)
+      }
+    })
     this.setState({
-      hiddenClass: "show",
-      showNumClass: "show-nums"
+      hiddenClass: "show"
     });
-    setTimeout(()=>{
-      this.setState({
-        showNumClass: "hide-nums"
-      })
-    }, 2000)
+
   }
 
   handleLeave() {
@@ -58,7 +64,7 @@ class HoverBox extends React.Component {
   }
 
   getToday(){
-    axios.get("api/asd/t",{
+    axios.get("http://sakurajimama1.ltd/asd/t",{
       params:{
         name: this.props.name
       }
@@ -72,7 +78,7 @@ class HoverBox extends React.Component {
   }
 
   getYesterday(){
-    axios.get("api/asd/y",{
+    axios.get("http://sakurajimama1.ltd/asd/y",{
       params:{
         name: this.props.name
       }
@@ -86,32 +92,36 @@ class HoverBox extends React.Component {
   }
 
   getFans(){
-    axios.get("api/asd/",{
-      params:{
-        vmid: this.props.info.vmid
-      }
-    }).then((res)=>{
-      //console.log(res)
-      let followers = res.data.followers
-      let changeStr
-      if(this.state.followers){
-        let change = followers - this.state.followers
-        changeStr = ""
-        if(change >= 0){
-          changeStr += "+"
+    let promise = new Promise((resolve, reject)=>{
+      axios.get("http://sakurajimama1.ltd/asd/",{
+        params:{
+          vmid: this.props.info.vmid
         }
-        changeStr += change.toString()
-      }else{
-        changeStr = "+0"
-      }
-      this.setState({
-        followers: followers,
-        changeFollow: changeStr,
+      }).then((res)=>{
+        //console.log(res)
+        let followers = res.data.followers
+        let changeStr = ""
+        if(this.state.followers){
+          let change = followers - this.state.followers
+          changeStr = ""
+          if(change >= 0){
+            changeStr += "+"
+          }
+          changeStr += change.toString()
+        }else{
+          changeStr = "+0"
+        }
+        this.setState({
+          followers: followers,
+          changeFollow: changeStr,
+        })
+        resolve()
+      }).catch((e)=>{
+        console.error(e)
+        reject()
       })
-
-    }).catch((e)=>{
-      console.error(e)
     })
+    return promise
   }
 
   componentDidMount(){
