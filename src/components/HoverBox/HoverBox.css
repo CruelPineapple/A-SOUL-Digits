@@ -1,6 +1,6 @@
 .outer-box{
     overflow: hidden;
-    width: 170px;
+    width: 180px;
     height: 270px;
     margin: 0 20px;
 }
@@ -18,7 +18,7 @@
     }
 }
 .image{
-    width: 170px;
+    width: 180px;
     height: 270px;
 }
 .bfc-box{
@@ -57,7 +57,7 @@
 }
 .show-nums{
     opacity: 1;
-    width: 15px;
+    width: 30px;
     transition: 0.5s;
 }
 .hide-nums{
