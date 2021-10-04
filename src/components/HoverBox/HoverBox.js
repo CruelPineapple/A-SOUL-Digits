@@ -17,11 +17,13 @@ class HoverBox extends React.Component {
       changeFollow: "",
       showNumClass: "hide-nums",
       yesterday: undefined,
-      today: undefined
+      today: undefined,
+      showDetail: false
     };
 
     this.handleEnter = this.handleEnter.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
+    this.toggleNum = this.toggleNum.bind(this);
   }
   get img() {
     const nameObj = {
@@ -36,6 +38,14 @@ class HoverBox extends React.Component {
 
   get yesterdayInc(){
     return this.state.today - this.state.yesterday
+  }
+
+  get followNum(){
+    if(this.state.showDetail){
+      return `粉丝数：${this.state.followers}`
+    }else{
+      return `粉丝数：${(this.state.followers/10000).toFixed(2)}万`
+    }
   }
 
   handleEnter() {
@@ -63,8 +73,16 @@ class HoverBox extends React.Component {
     });
   }
 
+  toggleNum(){
+    this.setState((prev)=>{
+      return {
+        showDetail: !prev.showDetail
+      }
+    })
+  }
+
   getToday(){
-    axios.get("http://sakurajimama1.ltd/asd/t",{
+    axios.get("api/asd/t",{
       params:{
         name: this.props.name
       }
@@ -78,7 +96,7 @@ class HoverBox extends React.Component {
   }
 
   getYesterday(){
-    axios.get("http://sakurajimama1.ltd/asd/y",{
+    axios.get("api/asd/y",{
       params:{
         name: this.props.name
       }
@@ -93,7 +111,7 @@ class HoverBox extends React.Component {
 
   getFans(){
     let promise = new Promise((resolve, reject)=>{
-      axios.get("http://sakurajimama1.ltd/asd/",{
+      axios.get("api/asd/",{
         params:{
           vmid: this.props.info.vmid
         }
@@ -140,7 +158,7 @@ class HoverBox extends React.Component {
         <div
           className={this.state.hiddenClass + " " + this.state.bgColor}
         >
-            <div className={"nums"}>粉丝数：{(this.state.followers / 10000).toFixed(2)}万
+            <div onClick={this.toggleNum} className={"nums"}>{this.followNum}
               <div className={`float-nums ${this.state.showNumClass}`}>{this.state.changeFollow}</div>
             </div>
             <div className={"nums"}>昨日涨粉：{this.yesterdayInc}</div>
