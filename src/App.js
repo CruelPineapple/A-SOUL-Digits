@@ -1,6 +1,7 @@
 import "./App.css";
 import Title from "./components/title/title";
 import HoverBox from "./components/HoverBox/HoverBox";
+import Guide from "./components/guide/Guide"
 import React from "react";
 
 class App extends React.Component {
@@ -50,6 +51,7 @@ class App extends React.Component {
           <HoverBox name="diana" info={this.state.D}></HoverBox>
           <HoverBox name="eileen" info={this.state.E}></HoverBox>
         </div>
+        <Guide></Guide>
       </div>
     );
   }
