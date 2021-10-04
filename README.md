@@ -82,6 +82,8 @@ NPM ERR cb.apply is not a function
 
 晚上直播喽，happy！
 
+这个游戏盯着看有点晕晕的，边看边搞了俩小功能，一个是粉丝数详细显示的切换，另一个是指南按钮
+
 ---
 
 
