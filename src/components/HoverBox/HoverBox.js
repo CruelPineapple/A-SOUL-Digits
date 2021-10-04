@@ -82,7 +82,7 @@ class HoverBox extends React.Component {
   }
 
   getToday(){
-    axios.get("api/asd/t",{
+    axios.get("http://sakurajimama1.ltd/asd/t",{
       params:{
         name: this.props.name
       }
@@ -96,7 +96,7 @@ class HoverBox extends React.Component {
   }
 
   getYesterday(){
-    axios.get("api/asd/y",{
+    axios.get("http://sakurajimama1.ltd/asd/y",{
       params:{
         name: this.props.name
       }
@@ -111,7 +111,7 @@ class HoverBox extends React.Component {
 
   getFans(){
     let promise = new Promise((resolve, reject)=>{
-      axios.get("api/asd/",{
+      axios.get("http://sakurajimama1.ltd/asd/",{
         params:{
           vmid: this.props.info.vmid
         }
