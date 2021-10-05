@@ -1,15 +1,17 @@
 .guide{
-    position: fixed;
-    left: 10px;
-    bottom: 10px;
-    display: flex;
 }
 .img{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
     width: 40px;
     height: 40px;
 }
 .show-guide{
-    height: 40px;
+    position: absolute;
+    left: 60px;
+    bottom: 10px;
+    height: 60px;
     opacity: 1;
     color: white;
     width: 200px;
@@ -19,16 +21,25 @@
     border-radius: 10px;
     margin-left: 15px;
     text-align: center;
+    padding: 0 10px;
     transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
+span{
+    display: inline-block;
+}
 .hide-guide{
+    position: absolute;
+    left: 60px;
+    bottom: 10px;
     opacity: 0;
-    height: 40px;
+    height: 60px;
+    color: white;
     width: 200px;
     font-size: 14px;
     background-color: #fc966e;
     border-radius: 10px;
     transition: 0.5s;
     margin-left: 15px;
+    padding: 0 10px;
     transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
