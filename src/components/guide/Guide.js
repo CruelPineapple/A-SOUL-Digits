@@ -46,6 +46,7 @@ class Guide extends React.Component {
           <span>每次展开信息的时候会刷新</span>
           <span>点一下粉丝数可以详细显示</span>
           <span>直接右键粉丝数复制</span>
+          <span>本周增长表示前七日增长，不包括今日</span>
         </div>
       </div>
     );
