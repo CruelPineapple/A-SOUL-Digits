@@ -18,7 +18,8 @@ class HoverBox extends React.Component {
       showNumClass: "hide-nums",
       yesterday: undefined,
       today: undefined,
-      showDetail: false
+      showDetail: false,
+      lastweek: undefined
     };
 
     this.handleEnter = this.handleEnter.bind(this);
@@ -42,10 +43,14 @@ class HoverBox extends React.Component {
 
   get followNum(){
     if(this.state.showDetail){
-      return `粉丝数：${this.state.followers}`
+      return `粉丝：${this.state.followers}`
     }else{
-      return `粉丝数：${(this.state.followers/10000).toFixed(2)}万`
+      return `粉丝：${(this.state.followers/10000).toFixed(2)}万`
     }
+  }
+
+  get weeklyInc(){
+    return this.state.today - this.state.lastweek
   }
 
   handleEnter() {
@@ -109,6 +114,20 @@ class HoverBox extends React.Component {
     })
   }
 
+  getLastweek(){
+    axios.get("http://sakurajimama1.ltd/asd/w",{
+      params:{
+        name: this.props.name
+      }
+    }).then((res)=>{
+      this.setState({
+        lastweek: res.data.lastweek
+      })
+    }).catch((e)=>{
+      console.log(e)
+    })
+  }
+
   getFans(){
     let promise = new Promise((resolve, reject)=>{
       axios.get("http://sakurajimama1.ltd/asd/",{
@@ -146,6 +165,7 @@ class HoverBox extends React.Component {
     this.getFans();
     this.getYesterday();
     this.getToday();
+    this.getLastweek();
   }
 
   render() {
@@ -161,8 +181,9 @@ class HoverBox extends React.Component {
             <div onClick={this.toggleNum} className={"nums"}>{this.followNum}
               <div className={`float-nums ${this.state.showNumClass}`}>{this.state.changeFollow}</div>
             </div>
-            <div className={"nums"}>昨日涨粉：{this.yesterdayInc}</div>
-            <div className={"nums"}>今日涨粉：{this.state.followers-this.state.today}</div>
+            <div className={"nums"}>今日增长：{this.state.followers-this.state.today}</div>
+            <div className={"nums"}>昨日增长：{this.yesterdayInc}</div>
+            <div className={"nums"}>本周增长：{this.weeklyInc}</div>
         </div>
         <div className="bfc-box">
           <div className="name-bar">{this.props.info.bar}</div>

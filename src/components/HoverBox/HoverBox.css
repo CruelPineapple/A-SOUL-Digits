@@ -35,7 +35,7 @@
 }
 .show{
     visibility: visible;
-    height: 90px;
+    height: 120px;
     padding-top: 7px;
     transition: 0.5s;
     position: relative;
