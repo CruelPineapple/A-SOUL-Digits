@@ -1,18 +1,13 @@
 import "./HoverBox.css";
-import imgAva from "../../assets/1.webp";
-import imgBella from "../../assets/2.webp";
-import imgCarol from "../../assets/3.webp";
-import imgDiana from "../../assets/4.webp";
-import imgEileen from "../../assets/5.webp";
+import MemberImg from "./img";
 import React from "react";
-import axios from "axios";
+import Api from "./api";
 
 class HoverBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hiddenClass: "hide",
-      bgColor: props.name,
       followers: undefined,
       changeFollow: "",
       showNumClass: "hide-nums",
@@ -26,15 +21,9 @@ class HoverBox extends React.Component {
     this.handleLeave = this.handleLeave.bind(this);
     this.toggleNum = this.toggleNum.bind(this);
   }
-  get img() {
-    const nameObj = {
-      ava: imgAva,
-      bella: imgBella,
-      carol: imgCarol,
-      diana: imgDiana,
-      eileen: imgEileen,
-    };
-    return nameObj[this.props.name];
+
+  get bgColor(){
+    return this.props.name
   }
 
   get yesterdayInc(){
@@ -87,11 +76,7 @@ class HoverBox extends React.Component {
   }
 
   getToday(){
-    axios.get("http://sakurajimama1.ltd/asd/t",{
-      params:{
-        name: this.props.name
-      }
-    }).then((res)=>{
+    Api.getToday(this.props.name).then((res)=>{
       this.setState({
         today: res.data.today
       })
@@ -101,11 +86,7 @@ class HoverBox extends React.Component {
   }
 
   getYesterday(){
-    axios.get("http://sakurajimama1.ltd/asd/y",{
-      params:{
-        name: this.props.name
-      }
-    }).then((res)=>{
+    Api.getYesterday(this.props.name).then((res)=>{
       this.setState({
         yesterday: res.data.yesterday
       })
@@ -115,11 +96,7 @@ class HoverBox extends React.Component {
   }
 
   getLastweek(){
-    axios.get("http://sakurajimama1.ltd/asd/w",{
-      params:{
-        name: this.props.name
-      }
-    }).then((res)=>{
+    Api.getLastweek(this.props.name).then((res)=>{
       this.setState({
         lastweek: res.data.lastweek
       })
@@ -130,11 +107,7 @@ class HoverBox extends React.Component {
 
   getFans(){
     let promise = new Promise((resolve, reject)=>{
-      axios.get("http://sakurajimama1.ltd/asd/",{
-        params:{
-          vmid: this.props.info.vmid
-        }
-      }).then((res)=>{
+      Api.getFans(this.props.info.vmid).then((res)=>{
         //console.log(res)
         let followers = res.data.followers
         let changeStr = ""
@@ -176,7 +149,7 @@ class HoverBox extends React.Component {
         className="outer-box"
       >
         <div
-          className={this.state.hiddenClass + " " + this.state.bgColor}
+          className={this.state.hiddenClass + " " + this.bgColor}
         >
             <div onClick={this.toggleNum} className={"nums"}>{this.followNum}
               <div className={`float-nums ${this.state.showNumClass}`}>{this.state.changeFollow}</div>
@@ -187,7 +160,7 @@ class HoverBox extends React.Component {
         </div>
         <div className="bfc-box">
           <div className="name-bar">{this.props.info.bar}</div>
-          <img className="image" src={this.img} alt=""></img>
+          <MemberImg name={this.props.name}/>
         </div>
       </div>
     );
