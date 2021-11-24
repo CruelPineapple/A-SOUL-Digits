@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import pic from "../../assets/guide.png";
 import "./Guide.css";
 
@@ -6,19 +6,16 @@ function Guide(){
 
   const [showGuide, setShowGuide] = useState(false)
 
-  const getClassName = useCallback(
-    () => {
-      if (showGuide) {
-        return "show-guide";
-      } else {
-        return "hide-guide";
-      }
-    },
-    [showGuide],
-  )
+  function className(){
+    if (showGuide) {
+      return "show-guide";
+    } else {
+      return "hide-guide";
+    }
+  }
 
   return (
-    <div className="guide">
+    <div className="guide-logo">
       <img
         onMouseEnter={()=>setShowGuide(!showGuide)}
         onMouseLeave={()=>setShowGuide(!showGuide)}
@@ -26,7 +23,7 @@ function Guide(){
         src={pic}
         alt=""
       ></img>
-      <div className={getClassName()}>
+      <div className={className()+' guide'}>
         <span>每次展开信息的时候会刷新</span>
         <span>点一下粉丝数可以详细显示</span>
         <span>直接右键粉丝数复制</span>
