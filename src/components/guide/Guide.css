@@ -1,4 +1,4 @@
-.guide{
+.guide-logo{
     position: fixed;
     left: 10px;
     bottom: 10px;
@@ -10,12 +10,11 @@
     width: 40px;
     height: 40px;
 }
-.show-guide{
+.guide{
     position: absolute;
     left: 60px;
     bottom: 10px;
     height: 80px;
-    opacity: 1;
     color: white;
     width: 270px;
     transition: 0.5s;
@@ -27,22 +26,12 @@
     padding: 5px 10px;
     transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
-span{
-    display: inline-block;
+.show-guide{
+    opacity: 1;
 }
 .hide-guide{
-    position: absolute;
-    left: 60px;
-    bottom: 10px;
     opacity: 0;
-    height: 80px;
-    color: white;
-    width: 270px;
-    font-size: 14px;
-    background-color: #fc966e;
-    border-radius: 10px;
-    transition: 0.5s;
-    margin-left: 15px;
-    padding: 5px 10px;
-    transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+}
+span{
+    display: inline-block;
 }
