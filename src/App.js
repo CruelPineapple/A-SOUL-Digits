@@ -1,6 +1,6 @@
 import "./App.css";
 import Title from "./components/title/title";
-import HoverBox from "../HoverBox/HoverBox";
+import HoverBox from "./components/HoverBox/HoverBox";
 import Guide from "./components/guide/Guide"
 import React from "react";
 
@@ -38,15 +38,16 @@ function createBoxList(list){
           key={item.name} 
           name={item.name} 
           info={item}
-          />
+        />
   )
 }
 
 function App() {
   return (
     <div className="App">
-      <Title text="A-SOUL Digits"></Title>
+      <Title>A-SOUL Digits</Title>
       <div className="hover-box-container">
+        {/* TODO：试试context */}
         {createBoxList(infoList)}
       </div>
       <Guide></Guide>
