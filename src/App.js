@@ -1,8 +1,7 @@
 import "./App.css";
 import Title from "./components/title/title";
-
+import HoverBox from "../HoverBox/HoverBox";
 import Guide from "./components/guide/Guide"
-import BoxList from "./components/BoxList/BoxList";
 import React from "react";
 
 const infoList = [
@@ -33,12 +32,22 @@ const infoList = [
   },
 ]
 
+function createBoxList(list){
+  return list.map((item) => 
+      <HoverBox 
+          key={item.name} 
+          name={item.name} 
+          info={item}
+          />
+  )
+}
+
 function App() {
   return (
     <div className="App">
       <Title text="A-SOUL Digits"></Title>
       <div className="hover-box-container">
-        <BoxList list={infoList}/>
+        {createBoxList(infoList)}
       </div>
       <Guide></Guide>
     </div>
