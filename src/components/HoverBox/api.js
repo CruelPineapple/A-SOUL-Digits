@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const server = "http://sakurajimama1.ltd";
+const server = "https://sakurajimama1.ltd";
 // const server = "/api"
 
 export function getFans(vmid) {
